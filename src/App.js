@@ -100,13 +100,16 @@ const App = () => {
     } else {
       personService.addPerson(newPerson)
         .then(person => {
-          console.log('+++++++')
           setPersons(persons.concat(person));
           setNewName('');
           setNewPhoneNumber('');
           setMessage( 'Person added!' );
           setTimeout(() => setMessage(null), 5000);
         })
+        .catch(error => {
+          setErrorMessage(error.response.data);
+          setTimeout(() => setErrorMessage(null), 5000);
+        });
     }
 
   };
